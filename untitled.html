@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simbolismo - Literatura</title>
+  <style>
+    /* --- Configurações gerais --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://images.unsplash.com/photo-1507842217343-583bb7270b66') no-repeat center center fixed;
+      background-size: cover;
+      color: #f5f5f5;
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+    }
+
+    /* --- Tela Inicial --- */
+    #tela-inicial {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #121212;
+      color: #d4af37;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 20px;
+      text-align: center;
+    }
+    #tela-inicial h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 6px black;
+    }
+    #tela-inicial p {
+      font-size: 1.3rem;
+      margin-bottom: 25px;
+      font-style: italic;
+    }
+    #tela-inicial nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 280px;
+    }
+    #tela-inicial button {
+      background: transparent;
+      border: 2px solid #d4af37;
+      color: #d4af37;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 12px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    }
+    #tela-inicial button:hover {
+      background-color: #d4af37;
+      color: #121212;
+      transform: scale(1.05);
+    }
+
+    /* --- Header --- */
+    header {
+      background: rgba(20, 20, 20, 0.85);
+      padding: 20px 15px;
+      text-align: center;
+      border-bottom: 3px solid #d4af37;
+      animation: fadeInDown 1s ease;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: #d4af37;
+      text-shadow: 2px 2px 5px black;
+      flex: 1 1 250px;
+    }
+
+    nav#menu-principal {
+      flex: 1 1 600px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    nav#menu-principal button {
+      background: transparent;
+      border: none;
+      color: #f5f5f5;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: color 0.3s, background-color 0.3s;
+    }
+
+    nav#menu-principal button:hover {
+      color: #121212;
+      background-color: #d4af37;
+      transform: scale(1.05);
+    }
+
+    /* --- Conteúdo das categorias --- */
+    .categoria {
+      background: rgba(25, 25, 25, 0.9);
+      margin: 40px auto;
+      padding: 30px 25px;
+      width: 80%;
+      max-width: 900px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      color: #f5f5f5;
+      display: none;
+      line-height: 1.7;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .categoria.visible {
+      display: block;
+    }
+
+    h2 {
+      color: #d4af37;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #d4af37;
+      display: inline-block;
+      padding-bottom: 6px;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+
+    /* --- Vídeo --- */
+    iframe {
+      display: block;
+      margin: 25px auto;
+      border: 3px solid #d4af37;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      transition: transform 0.4s;
+      max-width: 100%;
+      height: 315px;
+    }
+
+    iframe:hover {
+      transform: scale(1.05);
+    }
+/* --- Rodapé --- */
+    footer {
+      text-align: center;
+      padding: 18px 15px;
+      background: rgba(20,20,20,0.9);
+      margin-top: 50px;
+      border-top: 2px solid #d4af37;
+      font-size: 0.9rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    /* --- Animações --- */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tela Inicial -->
+  <div id="tela-inicial">
+    <h1>Bem-vindo ao Simbolismo no Brasil</h1>
+    <p>Escolha uma categoria para começar:</p>
+    <nav>
+      <button onclick="mostrarCategoria('caracteristicas')">Características</button>
+      <button onclick="mostrarCategoria('contexto')">Contexto Histórico</button>
+      <button onclick="mostrarCategoria('autor')">Autor</button>
+      <button onclick="mostrarCategoria('obras')">Obras</button>
+      <button onclick="mostrarCategoria('autor-destaque')">Autor de Destaque</button>
+      <button onclick="mostrarCategoria('obra-destaque')">Obra de Destaque</button>
+      <button onclick="mostrarCategoria('video')">Vídeo</button>
+    </nav>
+  </div>
+
+  <header>
+    <h1>Simbolismo no Brasil</h1>
+    <nav id="menu-principal" aria-label="Menu principal">
+      <button onclick="voltarTelaInicial()">Tela Inicial</button>
+      <button onclick="mostrarCategoria('caracteristicas')">Características</button>
+      <button onclick="mostrarCategoria('contexto')">Contexto Histórico</button>
+      <button onclick="mostrarCategoria('autor')">Autor</button>
+      <button onclick="mostrarCategoria('obras')">Obras</button>
+      <button onclick="mostrarCategoria('autor-destaque')">Autor de Destaque</button>
+      <button onclick="mostrarCategoria('obra-destaque')">Obra de Destaque</button>
+      <button onclick="mostrarCategoria('video')">Vídeo</button>
+    </nav>
+  </header>
+
+  <!-- Categorias -->
+  <section id="caracteristicas" class="categoria">
+    <h2>Características</h2>
+    <ul>
+      <li><b>Espiritualismo, religiosidade e transcendência:</b> o Simbolismo valoriza a conexão com o divino e o mundo espiritual.</li>
+      <li><b>Subjetivismo (emoções e estados da alma):</b> foco nos sentimentos íntimos e sensações pessoais.</li>
+      <li><b>Linguagem sugestiva, vaga e musical:</b> uso de ritmo, sonoridade e símbolos que evocam mais do que explicam.</li>
+      <li><b>Uso de símbolos, metáforas e imagens oníricas:</b> imagens que remetem a sonhos, mistérios e sensações difíceis de definir.</li>
+      <li><b>Temas:</b> morte, sonho, misticismo, espiritualidade, erotismo espiritualizado, angústia existencial.</li>
+      <li><b>Oposição ao cientificismo e objetivismo do Parnasianismo:</b> rejeita a objetividade e o racionalismo estrito.</li>
+      <li><b>Influência da música e do sinestésico:</b> busca criar uma experiência sensorial completa, misturando sentidos.</li>
+    </ul>
+    <p>O Simbolismo busca expressar o que está além da realidade material, utilizando a arte como veículo para o mistério e o espiritual.</p>
+  </section>
+
+  <section id="contexto" class="categoria">
+    <h2>Contexto Histórico</h2>
+    <p>O Simbolismo surgiu no Brasil em 1893, período marcado por grandes transformações sociais e culturais:</p>
+    <ul>
+      <li><b>Abolição da escravidão (1888):</b> mudanças profundas na estrutura social brasileira.</li>
+      <li><b>Proclamação da República (1889):</b> transição política e busca por novas identidades nacionais.</li>
+      <li><b>Influência da poesia francesa:</b> autores como Baudelaire, Verlaine e Mallarmé inspiraram os simbolistas brasileiros.</li>
+      <li><b>Reação ao Parnasianismo:</b> movimento que valorizava a forma perfeita e objetiva, o Simbolismo trouxe subjetividade e espiritualidade.</li>
+    </ul>
+    <p>Este contexto levou à valorização da introspecção, do mistério e do lado emocional da experiência humana.</p>
+  </section>
+
+  <section id="autor" class="categoria">
+    <h2>Autor Principal</h2>
+    <p><b>Cruz e Sousa (1861–1898)</b> é o principal nome do Simbolismo brasileiro, conhecido como "Cisne Negro" e "Dante Negro".</p>
+    <p>Ele nasceu em uma família negra durante o período pós-abolição, enfrentou dificuldades sociais e raciais, mas deixou uma obra rica e profunda.</p>
+    <p><b>Temas centrais na obra de Cruz e Sousa:</b></p>
+    <ul>
+      <li>A dor, a angústia e a busca pela transcendência.</li>
+      <li>Exploração do misticismo e do espiritualismo.</li>
+      <li>Uso intenso de simbolismos e metáforas para expressar o indescritível.</li>
+    </ul>
+    <p>Foi pioneiro na poesia simbolista no Brasil, influenciando gerações posteriores.</p>
+  </section>
+
+  <section id="obras" class="categoria">
+    <h2>Obras</h2>
+    <p>Algumas das obras principais do Simbolismo brasileiro incluem:</p>
+    <ul>
+      <li><b>"Broquéis" (1893)</b> - Cruz e Sousa</li>
+      <li><b>"Missal" (1893)</b> - Cruz e Sousa</li>
+      <li><b>"Faróis" (1897)</b> - Cruz e Sousa</li>
+      <li><b>"A esfinge" (1894)</b> - Alphonsus de Guimaraens</li>
+      <li><b>"Nocturno" (1899)</b> - Alphonsus de Guimaraens</li>
+    </ul>
+    <p>Estas obras exploram profundamente os temas simbolistas, com linguagem carregada de imagens, musicalidade e símbolos.</p>
+  </section>
+
+  <section id="autor-destaque" class="categoria">
+    <h2>Autor de Destaque</h2>
+    <p><b>Alphonsus de Guimaraens (1870–1921)</b> foi um dos mais importantes poetas simbolistas brasileiros depois de Cruz e Sousa.</p>
+    <p>Características de sua obra:</p>
+    <ul>
+      <li>Temática mística e religiosa.</li>
+      <li>Forte presença do amor idealizado e da morte.</li>
+      <li>Linguagem refinada e musical.</li>
+      <li>Influência do simbolismo francês e do misticismo cristão.</li>
+    </ul>
+    <p>Seu estilo ajudou a consolidar o Simbolismo no Brasil como uma expressão profunda da alma e do espiritual.</p>
+  </section>
+
+  <section id="obra-destaque" class="categoria">
+    <h2>Obra de Destaque</h2>
+    <p><b>"Broquéis" (1893) — Cruz e Sousa</b></p>
+    <p>Considerada a obra-prima do Simbolismo brasileiro, "Broquéis" é um conjunto de poemas que exploram:</p>
+    <ul>
+      <li>A proteção do poeta contra o mundo cruel (broquéis = escudos, proteções).</li>
+      <li>Temas de sofrimento, transcendência e esperança.</li>
+      <li>Linguagem simbólica e musicalidade profunda.</li>
+    </ul>
+    <p>O livro teve grande impacto e é estudado até hoje como uma referência máxima do movimento simbolista no Brasil.</p>
+  </section>
+
+  <section id="video" class="categoria">
+    <h2>Vídeo Explicativo</h2>
+    <iframe src="https://www.youtube.com/embed/dhFtBLHX9Pg" title="Vídeo sobre Simbolismo no Brasil" frameborder="0" allowfullscreen></iframe>
+    <p>Assista ao vídeo para uma explicação clara e didática sobre o Simbolismo no Brasil, seus autores, características e contexto.</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Simbolismo no Brasil. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    // Função para mostrar uma categoria e esconder as outras + tela inicial
+    function mostrarCategoria(id) {
+      // Esconder tela inicial
+      document.getElementById('tela-inicial').style.display = 'none';
+
+      // Esconder todas categorias
+      const categorias = document.querySelectorAll('.categoria');
+      categorias.forEach(cat => {
+        cat.classList.remove('visible');
+      });
+
+      // Mostrar a categoria escolhida
+      const escolhida = document.getElementById(id);
+      if (escolhida) {
+        escolhida.classList.add('visible');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+// Função para voltar à tela inicial (esconde categorias)
+    function voltarTelaInicial() {
+      // Mostrar tela inicial
+      document.getElementById('tela-inicial').style.display = 'flex';
+
+      // Esconder todas categorias
+      const categorias = document.querySelectorAll('.categoria');
+      categorias.forEach(cat => {
+        cat.classList.remove('visible');
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
